@@ -1,0 +1,893 @@
+ /* Styles généraux */
+body {
+    margin: 0;
+    font-family: sans-serif;
+    line-height: 1.6; /* Améliore la lisibilité */
+    color: #333; /* Couleur de texte par défaut */
+}
+
+/* Images gardes - doit s'adapter */
+.imagGARDE img {
+    max-width: 100%; /* S'assure que l'image ne déborde pas */
+    height: auto; /* Maintient le ratio d'aspect */
+    display: block; /* Supprime l'espace sous l'image */
+    object-fit: cover;
+    width: 100%; /* Pour s'assurer qu'elle occupe toute la largeur disponible */
+}
+
+/* Header */
+header {
+    background-color: rgb(245, 161, 52);
+    color: white;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    width: 100%;
+    flex-wrap: wrap; /* Permet aux éléments de passer à la ligne */
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* width: auto; On gérera la largeur avec flex-basis ou des media queries */
+}
+
+.logo img {
+    height: 50px;
+}
+
+.site-logo img {
+    height: 80px;
+    margin-left: 35px;
+}
+
+/* Burger Button (visible sur mobile, caché sur desktop) */
+.burger-btn {
+    background-color: rgba(0, 0, 0, 0.053);
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    padding: 10px;
+    margin-left: 5px;
+    border-radius: 10px;
+    display: none; /* Caché par défaut sur desktop */
+}
+
+/* Burger Menu Overlay */
+.burger-menu a:hover {
+    text-decoration: overline;
+}
+
+.burger-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    max-width: 80%; /* Limite la largeur sur les très petits écrans */
+    height: 100%;
+    background-color: #0a0a0ad2;
+    color: rgb(246, 242, 242);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease-in-out;
+    z-index: 101;
+    overflow-y: auto;
+}
+
+.burger-menu.open {
+    transform: translateX(0);
+}
+
+.menu-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+.close-menu-btn {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.menu-list li {
+    padding: 15px 20px;
+    border-bottom: 1px solid #444;
+}
+
+.menu-list li a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    display: block; /* Rend la zone de clic plus grande */
+}
+
+/* Main Navigation (Desktop) */
+.main-nav {
+    display: flex; /* Toujours flex sur desktop */
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap; /* Permet aux éléments de passer à la ligne si l'écran est trop petit */
+    justify-content: center; /* Centre les éléments si wrap */
+}
+
+.nav-item {
+    position: relative;
+    margin-right: 10px;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    text-align: center;
+}
+
+.nav-link:hover {
+    background-color: rgb(244, 141, 5);
+}
+
+/* Sub-menus */
+.sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(245, 161, 52, 0.858);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    min-width: 200px;
+    display: none; /* Caché par défaut, montré au hover/click */
+    flex-direction: column;
+    border: 0px solid #444;
+    box-shadow: 0px 4px 6px rgb(245, 161, 52); /* Correction de la faute de frappe */
+    z-index: 102;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.nav-item:hover > .sub-menu {
+    display: flex;
+}
+
+.sub-menu a {
+    color: white;
+    text-decoration: none;
+    padding: 12px 15px;
+    display: block;
+    text-align: center;
+}
+
+.sub-menu a:hover {
+    background-color: rgb(254, 144, 2);
+}
+
+/* Social Icons */
+.social-icons {
+    display: flex;
+    gap: 15px;
+    font-size: 20px;
+    margin-top: 10px;
+    order: 3;
+    width: 100%; /* Prend toute la largeur sur mobile */
+    justify-content: center;
+    flex-wrap: wrap; /* Permet aux icônes de passer à la ligne si trop nombreuses */
+}
+
+.social-icons a {
+    color: white;
+    text-decoration: none;
+}
+
+.social-icons a:hover {
+    color: #ddd;
+}
+
+/* Header Center (DIRPA logo and name) */
+.header-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Prend toute la largeur sur mobile */
+    order: 2;
+    margin-top: 10px;
+    flex-wrap: wrap; /* Permet aux éléments de passer à la ligne */
+}
+
+.site-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #18b482;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px #000000;
+    font-family: 'Arial Black', sans-serif;
+    padding: 10px 20px;
+    border: 2px solid white;
+    border-radius: 10px;
+    margin-right: 15px;
+    text-align: center; /* Centre le texte si une ligne */
+}
+
+.site-name .first-letter {
+    font-size: 36px;
+    color: #FFD700;
+}
+
+/* Search Container */
+#search-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    order: 4;
+    width: 100%; /* Prend toute la largeur sur mobile */
+    justify-content: center;
+}
+
+#search-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    width: 70%; /* Rendre le champ de recherche plus flexible */
+    max-width: 300px; /* Limite la largeur max */
+}
+
+.search-button {
+    padding: 8px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    margin-right: 0; /* Pas de marge à droite sur mobile */
+}
+
+.search-button:hover {
+    background-color: #45a049;
+}
+
+/* Main Content Area */
+.container {
+    display: flex;
+    flex-direction: column; /* Par défaut en colonne pour mobile */
+    height: auto; /* Hauteur auto pour s'adapter au contenu */
+    padding: 10px;
+    max-width: 1200px; /* Limite la largeur maximale sur grand écran */
+    margin: 20px auto; /* Centre le conteneur */
+}
+
+.left-section,
+.right-section {
+    flex: 1; /* Prendra toute la largeur disponible */
+    overflow-y: visible; /* Pas de scrollbar interne */
+    padding: 10px;
+    margin-bottom: 20px; /* Espace entre les sections sur mobile */
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    color: rgb(248, 143, 6);
+    font-size: 1.8em; /* Ajuste la taille pour mobile */
+    text-align: center;
+}
+
+.section-title::before,
+.section-title::after {
+    content: "";
+    flex: 1;
+    height: 4px;
+    background-color: rgb(248, 143, 6);
+    margin: 0 10px;
+}
+
+/* Articles */
+.article {
+    display: flex;
+    flex-direction: column; /* Les articles s'empilent verticalement sur mobile */
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    transition: transform 0.3s ease;
+    align-items: center; /* Centre les éléments dans l'article */
+    text-align: center; /* Centre le texte */
+}
+
+.article:hover {
+    transform: none; /* Désactive le scale pour mobile pour éviter des problèmes */
+}
+
+.article img {
+    width: 100%; /* L'image prend toute la largeur de l'article */
+    height: auto; /* Maintient le ratio */
+    max-height: 250px; /* Limite la hauteur max pour les images */
+    object-fit: cover;
+    margin-right: 0; /* Pas de marge à droite sur mobile */
+    margin-bottom: 10px; /* Espace sous l'image */
+}
+
+.article-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center; /* Centre le contenu textuel */
+    text-align: center;
+}
+
+.article-content h2 {
+    margin-top: 0;
+    font-size: 1.2em; /* Taille de police ajustée */
+}
+
+.article-content p {
+    font-size: 0.9em; /* Taille de police ajustée */
+    text-align: center; /* Centre le paragraphe */
+}
+
+.article-content a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.article-content a:hover {
+    color: #0619ea;
+}
+
+.date {
+    display: block;
+    margin-top: 10px; /* Espace au-dessus de la date */
+    margin-left: 0; /* Pas de marge auto sur mobile */
+    font-size: 0.8em;
+    color: #888;
+    text-align: center;
+    width: 100%; /* Prend toute la largeur */
+}
+
+.right-section .article {
+    flex-direction: column; /* Assure que les articles restent en colonne */
+    align-items: center;
+    text-align: center;
+}
+
+.right-section .article img {
+    margin-bottom: 10px;
+    height: auto; /* Laisser la hauteur s'ajuster */
+    max-height: 200px; /* Ajuste la hauteur max pour cette section */
+}
+
+.right-section a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.right-section a:hover {
+    color: #0619ea;
+}
+
+/* iframes (YouTube videos) */
+iframe {
+    width: 100%; /* Rendre les vidéos responsives */
+    height: 200px; /* Hauteur fixe pour les vidéos sur mobile */
+    max-height: 56.25vw; /* Ratio 16:9 pour maintenir la proportion */
+    margin-bottom: 15px; /* Espace sous la vidéo */
+}
+
+
+/* Slider */
+.fixed-size-slider-container {
+    width: 90%; /* Prend une grande partie de la largeur */
+    height: 250px; /* Hauteur réduite pour mobile */
+    overflow: hidden;
+    position: relative;
+    margin: 30px auto;
+    border-radius: 10px;
+}
+
+.fixed-size-slider {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide-info {
+    position: absolute;
+    bottom: 10px; /* Ajuste la position du texte */
+    left: 10px;
+    right: 10px; /* Permet au fond de s'étendre */
+    background-color: rgba(50, 48, 48, 0.6);
+    color: white;
+    padding: 10px; /* Ajoute du padding */
+    border-radius: 10px;
+}
+
+.slide-info h2 {
+    margin: 0; /* Supprime la marge par défaut */
+    font-size: 1em;
+}
+
+.slide-info a {
+    color: white;
+    text-decoration: none;
+}
+
+.slide-info .date {
+    font-size: 0.7em;
+    color: white;
+    margin-top: 5px; /* Espace au-dessus de la date */
+    text-align: left; /* Aligner à gauche */
+}
+
+.slider-controls {
+    position: absolute;
+    top: 50%;
+    left: 10px; /* Ajuste la position */
+    right: 10px; /* Ajuste la position */
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.slider-controls button {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 5px 10px; /* Diminue le padding */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em; /* Diminue la taille de la police */
+}
+
+/* Partners Band */
+.partners-band {
+    width: 100%;
+    overflow: hidden;
+    background-color: #f0f0f0;
+    padding: 20px 0; /* Réduit le padding */
+    box-sizing: border-box;
+    margin: 30px 0; /* Réduit la marge */
+}
+
+.partners-container {
+    display: flex;
+    animation: scroll 20s linear infinite;
+    white-space: nowrap;
+}
+
+.partner-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px; /* Réduit la marge entre les logos */
+    flex-shrink: 0;
+}
+
+.partner-logo img {
+    max-height: 50px; /* Réduit la hauteur max des logos */
+    max-width: 120px; /* Réduit la largeur max des logos */
+    object-fit: contain;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: rgb(248, 224, 135);
+    padding: 20px 10px; /* Ajoute un padding horizontal */
+    text-align: center; /* Centre le texte par défaut */
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column; /* Empile les sections du footer sur mobile */
+    align-items: center; /* Centre les éléments */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.ligne hr {
+    height: 2px; /* Ligne horizontale */
+    width: 80%; /* Prend une bonne partie de la largeur */
+    margin: 20px auto; /* Centre la ligne */
+    background-color: #444; /* Couleur de la ligne */
+    border: none;
+    transform: none; /* Retire la rotation pour mobile */
+}
+
+.footer-section {
+    flex: 1;
+    min-width: unset; /* Retire le min-width */
+    margin-bottom: 20px;
+    padding: 0 10px; /* Padding interne pour les sections */
+}
+
+.footer-section h3 {
+    margin-bottom: 10px;
+    font-size: 1.3em;
+}
+
+.footer-section p {
+    font-size: 0.9em;
+}
+
+.social-icons-footer a {
+    color: rgb(50, 168, 29);
+    font-size: 24px; /* Augmente la taille des icônes pour la facilité de clic */
+    margin: 0 8px; /* Espacement entre les icônes */
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #444;
+    font-size: 0.85em;
+}
+
+/* Styles pour la page de détails d'article */
+.article-detail-container {
+    max-width: 95%; /* Prend plus de largeur sur mobile */
+    margin: 20px auto;
+    padding: 10px; /* Réduit le padding */
+}
+
+.article-detail {
+    flex-direction: column;
+    border: 1px solid #ddd;
+    padding: 15px; /* Réduit le padding */
+}
+
+.article-detail img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.article-detail-content h1 {
+    margin-top: 0;
+    font-size: 1.5em; /* Ajuste la taille */
+}
+
+/* Styles pour la page de contenu du menu */
+.menu-content-container {
+    max-width: 95%;
+    margin: 20px auto;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.EspaceHR hr {
+    margin-top: 10px;
+    padding-top: 20px;
+    background-color: rgb(245, 161, 52);
+}
+
+.EspaceHR h2 {
+    text-align: center;
+    text-decoration: overline;
+    font-size: 1.6em; /* Ajuste la taille */
+}
+
+/* --- MEDIA QUERIES --- */
+
+/* Pour les écrans plus grands que 768px (Tablettes et Desktops) */
+@media (min-width: 769px) {
+    .burger-btn {
+        display: none; /* Cache le bouton burger sur les grands écrans */
+    }
+
+    .burger-menu {
+        transform: translateX(-100%); /* S'assure que le menu burger est caché */
+    }
+
+    /* Le header doit revenir à sa disposition desktop */
+    header {
+        flex-direction: column; /* Maintient cette direction pour que la main-nav soit en dessous */
+        align-items: center;
+    }
+
+    .header-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: nowrap; /* Empêche le wrap sur desktop */
+    }
+
+    .header-left {
+        width: auto;
+    }
+
+    .header-center {
+        width: auto;
+        order: unset; /* Réinitialise l'ordre */
+        margin-top: 0;
+    }
+
+    .social-icons {
+        width: auto;
+        order: unset; /* Réinitialise l'ordre */
+        margin-top: 0;
+    }
+
+    #search-container {
+        width: auto;
+        order: unset; /* Réinitialise l'ordre */
+        margin-top: 0;
+    }
+
+    .main-nav {
+        display: flex; /* Affiche la navigation principale sur desktop */
+        margin-top: 20px;
+    }
+
+    .nav-list {
+        flex-direction: row; /* La liste de navigation en ligne */
+        flex-wrap: nowrap;
+    }
+
+    .nav-item {
+        margin-right: 10px;
+    }
+
+    /* Conteneur principal en deux colonnes */
+    .container {
+        flex-direction: row; /* Les sections côte à côte */
+        height: 100vh; /* Revenir à la hauteur initiale si souhaité, mais 'auto' est souvent mieux */
+    }
+
+    .left-section {
+        flex: 2; /* Deux fois plus large que la section droite */
+        overflow-y: auto; /* Peut avoir un scrollbar interne si le contenu est long */
+        margin-bottom: 0; /* Pas de marge entre les sections en desktop */
+    }
+
+    .right-section {
+        flex: 1; /* Une fois la largeur de base */
+        overflow-y: auto; /* Peut avoir un scrollbar interne */
+        margin-bottom: 0;
+    }
+
+    .article {
+        flex-direction: row; /* Articles en ligne */
+        text-align: left; /* Alignement du texte à gauche */
+        align-items: flex-start; /* Aligne les éléments en haut */
+    }
+
+    .article:hover {
+        transform: scale(1.05); /* Réactive l'effet de zoom */
+    }
+
+    .article img {
+        width: 300px; /* Largeur fixe pour les images des articles */
+        height: 200px;
+        margin-right: 10px;
+        margin-bottom: 0;
+    }
+
+    .article-content {
+        align-items: flex-start; /* Aligne le contenu à gauche */
+        text-align: left;
+    }
+
+    .date {
+        margin-top: auto; /* Pousse la date vers le bas */
+        margin-left: auto; /* Pousse la date vers la droite */
+        text-align: right;
+    }
+
+    .right-section .article {
+        flex-direction: column; /* Les articles de la section droite restent en colonne */
+        align-items: center;
+        text-align: center;
+    }
+
+    .right-section .article img {
+        height: 250px; /* Revenir à la hauteur originale */
+    }
+
+    /* Slider sur desktop */
+    .fixed-size-slider-container {
+        width: 900px; /* Largeur fixe du conteneur (ajustez) */
+        height: 450px; /* Hauteur fixe du conteneur (ajustez) */
+    }
+
+    .slide-info {
+        bottom: 200px; /* Revenir à la position originale */
+        left: 50px;
+        right: auto; /* Retire le droit */
+        padding: 15px 20px; /* Padding original */
+    }
+
+    .slider-controls {
+        left: 50px;
+        right: 50px;
+    }
+
+    .slider-controls button {
+        padding: 10px 15px;
+        font-size: 1em;
+    }
+
+    /* Footer sur desktop */
+    footer {
+        text-align: left; /* Réaligner le texte à gauche */
+    }
+
+    .footer-container {
+        flex-direction: row; /* Les sections du footer en ligne */
+        justify-content: space-around;
+    }
+
+    .ligne hr {
+        height: 50px;
+        width: 2px; /* Revenir à une ligne verticale */
+        margin: 0;
+        transform: rotate(90deg);
+        transform-origin: top left;
+    }
+
+    .footer-section {
+        min-width: 200px; /* Revenir au min-width original */
+        padding: 0;
+    }
+
+    .social-icons-footer a {
+        font-size: 20px; /* Revenir à la taille originale des icônes */
+        margin-right: 10px;
+    }
+}
+
+/* Pour les très petits écrans (smartphones en mode portrait) */
+@media (max-width: 480px) {
+    .header-container {
+        padding: 0 10px; /* Moins de padding sur les très petits écrans */
+    }
+
+    .site-name {
+        font-size: 20px;
+        padding: 8px 15px;
+        margin-right: 0; /* Pas de marge à droite sur très petit */
+    }
+
+    .site-name .first-letter {
+        font-size: 30px;
+    }
+
+    .logo img {
+        height: 40px; /* Plus petit logo sur mobile */
+    }
+
+    .site-logo img {
+        height: 60px; /* Plus petit logo central */
+        margin-left: 10px;
+    }
+
+    .social-icons {
+        gap: 10px;
+        font-size: 18px;
+    }
+
+    #search-input {
+        width: 60%; /* Encore plus étroit pour laisser de la place au bouton */
+    }
+
+    .burger-menu {
+        width: 100%; /* Le menu prend toute la largeur sur très petit */
+        max-width: none;
+    }
+
+    .article-content h2 {
+        font-size: 1em; /* Réduit la taille des titres d'article */
+    }
+
+    .fixed-size-slider-container {
+        width: 95%; /* Prend presque toute la largeur */
+        height: 200px; /* Encore plus petit pour s'adapter */
+    }
+
+    .slide-info {
+        font-size: 0.9em;
+        bottom: 5px; /* Positionne le texte plus bas */
+        left: 5px;
+        right: 5px;
+        padding: 8px;
+    }
+
+    .slide-info h2 {
+        font-size: 0.9em;
+    }
+
+    .slider-controls button {
+        padding: 3px 8px;
+        font-size: 0.8em;
+    }
+
+    .partners-band {
+        padding: 15px 0;
+        margin: 20px 0;
+    }
+
+    .partner-logo img {
+        max-height: 40px;
+        max-width: 100px;
+    }
+}
+
+/* Styles spécifiques pour le corps quand le menu est ouvert (pour bloquer le scroll) */
+body.menu-open {
+    overflow: hidden;
+}
+
+/* Pour le comportement du burger menu - montre le bouton burger et cache la main-nav sur les petits écrans */
+@media (max-width: 768px) {
+    .burger-btn {
+        display: block; /* Affiche le bouton burger */
+    }
+
+    .main-nav {
+        display: none; /* Cache la navigation principale */
+    }
+
+    .header-container {
+        /* Ajustements spécifiques pour le layout du header sur mobile */
+        flex-direction: column;
+        align-items: center;
+        padding: 0 10px;
+    }
+
+    .header-left {
+        width: 100%;
+        justify-content: space-between; /* Espace le logo et le bouton burger */
+    }
+
+    .header-center,
+    .social-icons,
+    #search-container {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px; /* Ajoute un peu d'espace */
+    }
+}
