@@ -5,6 +5,7 @@ const navItems = document.querySelectorAll('.nav-item');
 const body = document.querySelector('body');
 const searchInput = document.getElementById('search-input');
 const searchButton = document.getElementById('search-button');
+const header = document.querySelector('header');
 
 burgerBtn.addEventListener('click', () => {
     const isExpanded = burgerMenu.classList.contains('open');
@@ -117,3 +118,24 @@ startSlider();
 // Mettre en pause au survol (optionnel)
 sliderContainer.addEventListener('mouseenter', stopSlider);
 sliderContainer.addEventListener('mouseleave', startSlider);
+// --- Comportement du header au défilement ---
+let lastScrollTop = 0; // Pour détecter la direction du scroll (pas strictement nécessaire ici, mais bonne pratique)
+
+function handleScroll() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    // Si l'utilisateur a défilé plus de 50px (valeur à ajuster selon la hauteur de votre header initial)
+    if (scrollTop > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+}
+
+// Écouteur d'événement pour le défilement
+window.addEventListener('scroll', handleScroll);
+
+// Exécute la fonction au chargement pour le cas où la page est déjà scrollée
+handleScroll();
