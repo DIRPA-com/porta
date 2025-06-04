@@ -6,6 +6,11 @@ body {
     color: #333; /* Couleur de texte par défaut */
 }
 
+/* Masque le scrollbar pour le body quand le menu est ouvert */
+body.menu-open {
+    overflow: hidden;
+}
+
 /* Images gardes - doit s'adapter */
 .imagGARDE img {
     max-width: 100%; /* S'assure que l'image ne déborde pas */
@@ -26,7 +31,59 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: padding 0.3s ease, height 0.3s ease, min-height 0.3s ease, background-color 0.3s ease; /* Ajout d'une transition pour une animation douce */
 }
+
+/* Styles pour l'état réduit du header */
+header.scrolled {
+    padding: 0; /* Réduit le padding */
+    min-height: 60px; /* Hauteur minimale pour le menu */
+    height: auto; /* La hauteur s'ajuste au contenu réduit */
+    flex-direction: row; /* Pour que le logo et le menu soient côte à côte */
+    justify-content: flex-start; /* Aligne tout à gauche */
+    align-items: center; /* Centre verticalement */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Ajoute une ombre pour le rendre plus visible */
+    background-color: rgb(244, 141, 5); /* Couleur légèrement différente quand réduit */
+}
+
+/* Cache les éléments supérieurs du header quand il est réduit */
+header.scrolled .header-center,
+header.scrolled .social-icons,
+header.scrolled #search-container {
+    display: none !important; /* Force le masquage */
+}
+
+/* Ajuste la position du logo dans le header réduit */
+header.scrolled .header-left {
+    flex-grow: 0; /* Ne prend pas d'espace supplémentaire */
+    width: auto;
+    margin-right: 20px; /* Espace entre le logo/burger et le menu nav */
+    padding-left: 10px; /* Ajoute un petit padding à gauche */
+}
+
+header.scrolled .header-left .logo img {
+    height: 40px; /* Réduit la taille du logo principal */
+    transition: height 0.3s ease;
+}
+
+/* Ajuste le menu principal quand le header est réduit */
+header.scrolled .main-nav {
+    margin-top: 0; /* Supprime la marge supérieure */
+    flex-grow: 1; /* Permet au menu de prendre l'espace restant */
+    justify-content: flex-start; /* Aligne le menu à gauche */
+}
+
+/* Ajuste les éléments de la liste de navigation si nécessaire */
+header.scrolled .nav-list {
+    /* Pas de changements majeurs nécessaires ici si déjà compact */
+}
+
+/* S'assurer que le burger-btn reste à gauche et à la bonne taille si 'scrolled' */
+header.scrolled .burger-btn {
+    font-size: 24px; /* légèrement plus petit si besoin */
+    padding: 5px;
+}
+
 
 .header-container {
     display: flex;
@@ -41,7 +98,6 @@ header {
     display: flex;
     align-items: center;
     gap: 10px;
-    /* width: auto; On gérera la largeur avec flex-basis ou des media queries */
 }
 
 .logo img {
@@ -53,7 +109,7 @@ header {
     margin-left: 35px;
 }
 
-/* Burger Button (visible sur mobile, caché sur desktop) */
+/* Burger Button (toujours visible) */
 .burger-btn {
     background-color: rgba(0, 0, 0, 0.053);
     border: none;
@@ -63,7 +119,7 @@ header {
     padding: 10px;
     margin-left: 5px;
     border-radius: 10px;
-    display: none; /* Caché par défaut sur desktop */
+    display: block; /* Toujours visible */
 }
 
 /* Burger Menu Overlay */
@@ -122,9 +178,9 @@ header {
     display: block; /* Rend la zone de clic plus grande */
 }
 
-/* Main Navigation (Desktop) */
+/* Main Navigation (Desktop style, mais toujours visible) */
 .main-nav {
-    display: flex; /* Toujours flex sur desktop */
+    display: flex; /* Toujours flex */
     justify-content: center;
     margin-top: 20px;
     width: 100%;
@@ -169,7 +225,7 @@ header {
     display: none; /* Caché par défaut, montré au hover/click */
     flex-direction: column;
     border: 0px solid #444;
-    box-shadow: 0px 4px 6px rgb(245, 161, 52); /* Correction de la faute de frappe */
+    box-shadow: 0px 4px 6px rgb(245, 161, 52);
     z-index: 102;
     max-height: 200px;
     overflow-y: auto;
@@ -513,6 +569,16 @@ iframe {
     object-fit: contain;
 }
 
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+
 /* Footer */
 footer {
     background-color: #333;
@@ -611,19 +677,12 @@ footer {
     font-size: 1.6em; /* Ajuste la taille */
 }
 
+
 /* --- MEDIA QUERIES --- */
 
 /* Pour les écrans plus grands que 768px (Tablettes et Desktops) */
 @media (min-width: 769px) {
-    .burger-btn {
-        display: none; /* Cache le bouton burger sur les grands écrans */
-    }
-
-    .burger-menu {
-        transform: translateX(-100%); /* S'assure que le menu burger est caché */
-    }
-
-    /* Le header doit revenir à sa disposition desktop */
+    /* Le header doit revenir à sa disposition desktop normale, mais sans cacher le burger */
     header {
         flex-direction: column; /* Maintient cette direction pour que la main-nav soit en dessous */
         align-items: center;
@@ -638,6 +697,7 @@ footer {
 
     .header-left {
         width: auto;
+        /* Le burger-btn est déjà display: block; globalement, donc pas besoin de le modifier ici */
     }
 
     .header-center {
@@ -765,8 +825,9 @@ footer {
         height: 50px;
         width: 2px; /* Revenir à une ligne verticale */
         margin: 0;
+        background-color: #444; /* Couleur de la ligne */
         transform: rotate(90deg);
-        transform-origin: top left;
+        transform-origin: center; /* Centre la rotation */
     }
 
     .footer-section {
@@ -861,112 +922,11 @@ body.menu-open {
     overflow: hidden;
 }
 
-/* Pour le comportement du burger menu - montre le bouton burger et cache la main-nav sur les petits écrans */
-@media (max-width: 768px) {
-    .burger-btn {
-        display: block; /* Affiche le bouton burger */
-    }
-
-    .main-nav {
-        display: none; /* Cache la navigation principale */
-    }
-
-    .header-container {
-        /* Ajustements spécifiques pour le layout du header sur mobile */
-        flex-direction: column;
-        align-items: center;
-        padding: 0 10px;
-    }
-
-    .header-left {
-        width: 100%;
-        justify-content: space-between; /* Espace le logo et le bouton burger */
-    }
-
-    .header-center,
-    .social-icons,
-    #search-container {
-        width: 100%;
-        justify-content: center;
-        margin-top: 10px; /* Ajoute un peu d'espace */
-    }
-/* --- Styles pour l'en-tête réduit au défilement --- */
-
-/* Masque le scrollbar pour le body quand le menu est ouvert */
-body.menu-open {
-    overflow: hidden;
-}
-
-/* Style par défaut pour le header (déjà présent, mais ici pour référence) */
-header {
-    background-color: rgb(245, 161, 52);
-    color: white;
-    padding: 10px 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: padding 0.3s ease, height 0.3s ease; /* Ajout d'une transition pour une animation douce */
-}
-
-/* Styles pour l'état réduit du header */
-header.scrolled {
-    padding: 0; /* Réduit le padding */
-    height: auto; /* La hauteur s'ajuste au contenu réduit */
-    min-height: 60px; /* Hauteur minimale pour le menu */
-    flex-direction: row; /* Pour que le logo et le menu soient côte à côte */
-    justify-content: flex-start; /* Aligne tout à gauche */
-    align-items: center; /* Centre verticalement */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Ajoute une ombre pour le rendre plus visible */
-}
-
-/* Cache les éléments supérieurs du header quand il est réduit */
-header.scrolled .header-center,
-header.scrolled .social-icons,
-header.scrolled #search-container {
-    display: none !important; /* Force le masquage */
-}
-
-/* Ajuste la position du logo dans le header réduit */
-header.scrolled .header-left {
-    /* Garde le logo et le burger menu à gauche */
-    flex-grow: 0; /* Ne prend pas d'espace supplémentaire */
-    width: auto;
-    margin-right: 20px; /* Espace entre le logo/burger et le menu nav */
-}
-
-header.scrolled .header-left .logo img {
-    height: 40px; /* Réduit la taille du logo principal */
-    transition: height 0.3s ease;
-}
-
-/* Ajuste le menu principal quand le header est réduit */
-header.scrolled .main-nav {
-    margin-top: 0; /* Supprime la marge supérieure */
-    flex-grow: 1; /* Permet au menu de prendre l'espace restant */
-    justify-content: flex-start; /* Aligne le menu à gauche */
-}
-
-/* Ajuste les éléments de la liste de navigation si nécessaire */
-header.scrolled .nav-list {
-    /* Pas de changements majeurs nécessaires ici si déjà compact */
-}
-
-/* S'assurer que le burger-btn reste à gauche et à la bonne taille si 'scrolled' */
-header.scrolled .burger-btn {
-    font-size: 24px; /* légèrement plus petit si besoin */
-    padding: 5px;
-}
-
-
-/* --- Media Queries ajustées pour l'état réduit sur mobile --- */
-
+/* Comportement du header sur mobile quand il est réduit (scrolled) */
 @media (max-width: 768px) {
     header.scrolled {
         flex-direction: row; /* Revenir en ligne pour mobile aussi */
-        justify-content: space-between; /* Espace entre logo/burger et rien */
+        justify-content: space-between; /* Espace entre logo/burger et le reste (qui est caché) */
         align-items: center;
         min-height: 50px; /* Encore plus petit sur mobile */
         padding: 5px 10px; /* Padding ajusté */
@@ -981,15 +941,8 @@ header.scrolled .burger-btn {
         height: 35px; /* Plus petit sur mobile */
     }
 
-    /* Quand le header est réduit sur mobile, la main-nav est toujours cachée */
+    /* Quand le header est réduit sur mobile, la main-nav est toujours cachée (par défaut mobile) */
     header.scrolled .main-nav {
         display: none;
-    }
-
-    /* Cache toujours le bouton burger dans le mode 'scrolled' pour les grands écrans */
-    @media (min-width: 769px) {
-        header.scrolled .burger-btn {
-            display: block; /* S'assure que le burger reste visible sur grand écran même en mode scrolled */
-        }
     }
 }
