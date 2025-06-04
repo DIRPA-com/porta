@@ -890,4 +890,106 @@ body.menu-open {
         justify-content: center;
         margin-top: 10px; /* Ajoute un peu d'espace */
     }
+/* --- Styles pour l'en-tête réduit au défilement --- */
+
+/* Masque le scrollbar pour le body quand le menu est ouvert */
+body.menu-open {
+    overflow: hidden;
+}
+
+/* Style par défaut pour le header (déjà présent, mais ici pour référence) */
+header {
+    background-color: rgb(245, 161, 52);
+    color: white;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: padding 0.3s ease, height 0.3s ease; /* Ajout d'une transition pour une animation douce */
+}
+
+/* Styles pour l'état réduit du header */
+header.scrolled {
+    padding: 0; /* Réduit le padding */
+    height: auto; /* La hauteur s'ajuste au contenu réduit */
+    min-height: 60px; /* Hauteur minimale pour le menu */
+    flex-direction: row; /* Pour que le logo et le menu soient côte à côte */
+    justify-content: flex-start; /* Aligne tout à gauche */
+    align-items: center; /* Centre verticalement */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Ajoute une ombre pour le rendre plus visible */
+}
+
+/* Cache les éléments supérieurs du header quand il est réduit */
+header.scrolled .header-center,
+header.scrolled .social-icons,
+header.scrolled #search-container {
+    display: none !important; /* Force le masquage */
+}
+
+/* Ajuste la position du logo dans le header réduit */
+header.scrolled .header-left {
+    /* Garde le logo et le burger menu à gauche */
+    flex-grow: 0; /* Ne prend pas d'espace supplémentaire */
+    width: auto;
+    margin-right: 20px; /* Espace entre le logo/burger et le menu nav */
+}
+
+header.scrolled .header-left .logo img {
+    height: 40px; /* Réduit la taille du logo principal */
+    transition: height 0.3s ease;
+}
+
+/* Ajuste le menu principal quand le header est réduit */
+header.scrolled .main-nav {
+    margin-top: 0; /* Supprime la marge supérieure */
+    flex-grow: 1; /* Permet au menu de prendre l'espace restant */
+    justify-content: flex-start; /* Aligne le menu à gauche */
+}
+
+/* Ajuste les éléments de la liste de navigation si nécessaire */
+header.scrolled .nav-list {
+    /* Pas de changements majeurs nécessaires ici si déjà compact */
+}
+
+/* S'assurer que le burger-btn reste à gauche et à la bonne taille si 'scrolled' */
+header.scrolled .burger-btn {
+    font-size: 24px; /* légèrement plus petit si besoin */
+    padding: 5px;
+}
+
+
+/* --- Media Queries ajustées pour l'état réduit sur mobile --- */
+
+@media (max-width: 768px) {
+    header.scrolled {
+        flex-direction: row; /* Revenir en ligne pour mobile aussi */
+        justify-content: space-between; /* Espace entre logo/burger et rien */
+        align-items: center;
+        min-height: 50px; /* Encore plus petit sur mobile */
+        padding: 5px 10px; /* Padding ajusté */
+    }
+
+    header.scrolled .header-left {
+        margin-right: 0; /* Pas de marge inutile */
+        justify-content: flex-start;
+    }
+
+    header.scrolled .header-left .logo img {
+        height: 35px; /* Plus petit sur mobile */
+    }
+
+    /* Quand le header est réduit sur mobile, la main-nav est toujours cachée */
+    header.scrolled .main-nav {
+        display: none;
+    }
+
+    /* Cache toujours le bouton burger dans le mode 'scrolled' pour les grands écrans */
+    @media (min-width: 769px) {
+        header.scrolled .burger-btn {
+            display: block; /* S'assure que le burger reste visible sur grand écran même en mode scrolled */
+        }
+    }
 }
